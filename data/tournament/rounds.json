@@ -1,0 +1,40 @@
+{
+  "rounds" : [ {
+    "name" : "Round 1",
+    "matches" : [ {
+      "winner" : "wild titans",
+      "team1" : "Wild Titans",
+      "team2" : "Iron Bears"
+    }, {
+      "winner" : "iron wolves",
+      "team1" : "Iron Sharks",
+      "team2" : "Iron Wolves"
+    }, {
+      "winner" : "epic sharks",
+      "team1" : "Epic Sharks",
+      "team2" : "Mighty Bears"
+    }, {
+      "winner" : "wild tigers",
+      "team1" : "Epic Tigers",
+      "team2" : "Wild Tigers"
+    } ]
+  }, {
+    "name" : "Quarterfinals",
+    "matches" : [ {
+      "winner" : "wild titans",
+      "team1" : "Wild Titans",
+      "team2" : "Iron Wolves"
+    }, {
+      "winner" : "wild tigers",
+      "team1" : "Epic Sharks",
+      "team2" : "Wild Tigers"
+    } ]
+  }, {
+    "name" : "Semifinals",
+    "matches" : [ {
+      "winner" : "wild titans",
+      "team1" : "Wild Titans",
+      "team2" : "Wild Tigers"
+    } ]
+  } ]
+}

@@ -1,0 +1,50 @@
+{
+  "teamName": "Iron Wolves",
+  "members": [
+    {
+      "discordName": "Autogen#0009",
+      "discordId": "autogen-0009",
+      "leagueIGN": "알리페데#사도조한",
+      "leagueUID": "6h4EM4j6YYpqTelgwroyVpgXcethOAT_8fS126ljy4pNOp30t3ZYaFBSivrcbDq_IeVMKP7HAgRRMQ",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1329
+    },
+    {
+      "discordName": "Autogen#0002",
+      "discordId": "autogen-0002",
+      "leagueIGN": "Empathy#NAッ",
+      "leagueUID": "sfZbZ-efIoEqYlKTUT8tlXg3VWrUwc_jxz1zmPsDKjU4v-vrSMRE_0C-Ue8Z9_8AMlN09u0RDJOSpA",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 290
+    },
+    {
+      "discordName": "Autogen#0003",
+      "discordId": "autogen-0003",
+      "leagueIGN": "Crucible#Geto",
+      "leagueUID": "6E5s_ciRkSEpM8a0vl5KdR5k_UfxXwdd5QMa7HTCTYTKpGubkQnXi_VK8id4NKlpas25EcRyQeYsSQ",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 156
+    },
+    {
+      "discordName": "Autogen#0009",
+      "discordId": "autogen-0009",
+      "leagueIGN": "알리페데#사도조한",
+      "leagueUID": "6h4EM4j6YYpqTelgwroyVpgXcethOAT_8fS126ljy4pNOp30t3ZYaFBSivrcbDq_IeVMKP7HAgRRMQ",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1329
+    },
+    {
+      "discordName": "Autogen#0004",
+      "discordId": "autogen-0004",
+      "leagueIGN": "어느 화창한 여름#NA01",
+      "leagueUID": "eoGTgdECPYP6zn8DMKIqP1LNXsrLW4H_LR93xzg-k-homcAN5Fx_ZH5lbQycstixNx_gmTARj1MxKA",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 166
+    }
+  ]
+}

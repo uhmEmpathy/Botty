@@ -1,0 +1,50 @@
+{
+  "teamName": "Epic Sharks",
+  "members": [
+    {
+      "discordName": "Autogen#0008",
+      "discordId": "autogen-0008",
+      "leagueIGN": "Daption#TwTv",
+      "leagueUID": "rfOMAcM9GE0NrT0MRTebAjjwCp6CpvV8OzfeJomNIgZ7uisSddfB17WLTZCE3glL1qta3mUbfyIlDg",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1317
+    },
+    {
+      "discordName": "Autogen#0003",
+      "discordId": "autogen-0003",
+      "leagueIGN": "Crucible#Geto",
+      "leagueUID": "6E5s_ciRkSEpM8a0vl5KdR5k_UfxXwdd5QMa7HTCTYTKpGubkQnXi_VK8id4NKlpas25EcRyQeYsSQ",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 156
+    },
+    {
+      "discordName": "Autogen#0007",
+      "discordId": "autogen-0007",
+      "leagueIGN": "kisno#NA1",
+      "leagueUID": "EuDV_WPtUqqEn-L6iqD_Fe1qzTbf_v6GnRcQRIn0fgCynwOyAcWYW9iYUmDFLkscVuBZvb9t-F5eLQ",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1717
+    },
+    {
+      "discordName": "Autogen#0010",
+      "discordId": "autogen-0010",
+      "leagueIGN": "Evei#tudi",
+      "leagueUID": "cSJhIdx0ZnGieYvwoIbim_OsRj2mVPoJBs6cwAb_bKp7PtX-xF2HZkKY0pbnlCbKH9o-EvE2IPcedQ",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 496
+    },
+    {
+      "discordName": "Autogen#0013",
+      "discordId": "autogen-0013",
+      "leagueIGN": "Kanami#ahj",
+      "leagueUID": "i_XYp8rhdAmPgX_6H0avdn_ybKnSVMvKPGopa0vr6VkM54QnApDbYEU6nXq2aZo4SuVoPZhns_S-9w",
+      "rankTier": "GRANDMASTER",
+      "rankDivision": "I",
+      "leaguePoints": 783
+    }
+  ]
+}

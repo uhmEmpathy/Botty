@@ -1,0 +1,50 @@
+{
+  "teamName": "Mighty Bears",
+  "members": [
+    {
+      "discordName": "Autogen#0014",
+      "discordId": "autogen-0014",
+      "leagueIGN": "Cendi#NA1",
+      "leagueUID": "nMxNaxpfO2JzW-TBc3pBS2h9tCXBNs9Qqs6Wtjxe2bNrQXf-3zc1oM0WXlMGkUng4G4MzvjTxh7yDw",
+      "rankTier": "GRANDMASTER",
+      "rankDivision": "I",
+      "leaguePoints": 525
+    },
+    {
+      "discordName": "Autogen#0002",
+      "discordId": "autogen-0002",
+      "leagueIGN": "Empathy#NAッ",
+      "leagueUID": "sfZbZ-efIoEqYlKTUT8tlXg3VWrUwc_jxz1zmPsDKjU4v-vrSMRE_0C-Ue8Z9_8AMlN09u0RDJOSpA",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 290
+    },
+    {
+      "discordName": "Autogen#0007",
+      "discordId": "autogen-0007",
+      "leagueIGN": "kisno#NA1",
+      "leagueUID": "EuDV_WPtUqqEn-L6iqD_Fe1qzTbf_v6GnRcQRIn0fgCynwOyAcWYW9iYUmDFLkscVuBZvb9t-F5eLQ",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1717
+    },
+    {
+      "discordName": "Autogen#0001",
+      "discordId": "autogen-0001",
+      "leagueIGN": "Empathy#NA3",
+      "leagueUID": "heXoscmCR1nQ1lLiv_RLVTY1hZtpg4fUlxLIdFvAcxapQ5ituWDv73Yg_ncjZrqwmwCgVkCRIaD07g",
+      "rankTier": "DIAMOND",
+      "rankDivision": "II",
+      "leaguePoints": 23
+    },
+    {
+      "discordName": "Autogen#0006",
+      "discordId": "autogen-0006",
+      "leagueIGN": "C9 Loki#kr3",
+      "leagueUID": "_J33OQ2XqOWcEvMbOdJPzpmtPmWCdxR_x70TNZlkzt1fcn0XsIL3HE13Mso-fwObhmp40A463z7g5w",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1982
+    }
+  ]
+}

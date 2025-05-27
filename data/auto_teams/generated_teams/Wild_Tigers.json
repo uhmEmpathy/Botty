@@ -1,0 +1,50 @@
+{
+  "teamName": "Wild Tigers",
+  "members": [
+    {
+      "discordName": "Autogen#0011",
+      "discordId": "autogen-0011",
+      "leagueIGN": "TvAnUglyBroccoli#TTV",
+      "leagueUID": "Q-66Uex09tGQrc_Tx7_l3VEaLKR3LREwCzJeGUDxMeFSCz5L9NmIbZ426O_lyPnn8igz0-AUCCReUQ",
+      "rankTier": "GRANDMASTER",
+      "rankDivision": "I",
+      "leaguePoints": 547
+    },
+    {
+      "discordName": "Autogen#0006",
+      "discordId": "autogen-0006",
+      "leagueIGN": "C9 Loki#kr3",
+      "leagueUID": "_J33OQ2XqOWcEvMbOdJPzpmtPmWCdxR_x70TNZlkzt1fcn0XsIL3HE13Mso-fwObhmp40A463z7g5w",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1982
+    },
+    {
+      "discordName": "Autogen#0013",
+      "discordId": "autogen-0013",
+      "leagueIGN": "Kanami#ahj",
+      "leagueUID": "i_XYp8rhdAmPgX_6H0avdn_ybKnSVMvKPGopa0vr6VkM54QnApDbYEU6nXq2aZo4SuVoPZhns_S-9w",
+      "rankTier": "GRANDMASTER",
+      "rankDivision": "I",
+      "leaguePoints": 783
+    },
+    {
+      "discordName": "Autogen#0004",
+      "discordId": "autogen-0004",
+      "leagueIGN": "어느 화창한 여름#NA01",
+      "leagueUID": "eoGTgdECPYP6zn8DMKIqP1LNXsrLW4H_LR93xzg-k-homcAN5Fx_ZH5lbQycstixNx_gmTARj1MxKA",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 166
+    },
+    {
+      "discordName": "Autogen#0008",
+      "discordId": "autogen-0008",
+      "leagueIGN": "Daption#TwTv",
+      "leagueUID": "rfOMAcM9GE0NrT0MRTebAjjwCp6CpvV8OzfeJomNIgZ7uisSddfB17WLTZCE3glL1qta3mUbfyIlDg",
+      "rankTier": "CHALLENGER",
+      "rankDivision": "I",
+      "leaguePoints": 1317
+    }
+  ]
+}

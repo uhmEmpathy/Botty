@@ -1,0 +1,50 @@
+{
+  "teamName": "Iron Bears",
+  "members": [
+    {
+      "discordName": "Autogen#0005",
+      "discordId": "autogen-0005",
+      "leagueIGN": "Xan1924#NA1",
+      "leagueUID": "IG7_OH4WTNtrM3g_6lRBSpz3ge4fNQcPpMROm5JLjSvuPuU56x4AIzzLDJFtyC9uhKeNKqi4Owx4qw",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 306
+    },
+    {
+      "discordName": "Autogen#0010",
+      "discordId": "autogen-0010",
+      "leagueIGN": "Evei#tudi",
+      "leagueUID": "cSJhIdx0ZnGieYvwoIbim_OsRj2mVPoJBs6cwAb_bKp7PtX-xF2HZkKY0pbnlCbKH9o-EvE2IPcedQ",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 496
+    },
+    {
+      "discordName": "Autogen#0001",
+      "discordId": "autogen-0001",
+      "leagueIGN": "Empathy#NA3",
+      "leagueUID": "heXoscmCR1nQ1lLiv_RLVTY1hZtpg4fUlxLIdFvAcxapQ5ituWDv73Yg_ncjZrqwmwCgVkCRIaD07g",
+      "rankTier": "DIAMOND",
+      "rankDivision": "II",
+      "leaguePoints": 23
+    },
+    {
+      "discordName": "Autogen#0013",
+      "discordId": "autogen-0013",
+      "leagueIGN": "Kanami#ahj",
+      "leagueUID": "i_XYp8rhdAmPgX_6H0avdn_ybKnSVMvKPGopa0vr6VkM54QnApDbYEU6nXq2aZo4SuVoPZhns_S-9w",
+      "rankTier": "GRANDMASTER",
+      "rankDivision": "I",
+      "leaguePoints": 783
+    },
+    {
+      "discordName": "Autogen#0005",
+      "discordId": "autogen-0005",
+      "leagueIGN": "Xan1924#NA1",
+      "leagueUID": "IG7_OH4WTNtrM3g_6lRBSpz3ge4fNQcPpMROm5JLjSvuPuU56x4AIzzLDJFtyC9uhKeNKqi4Owx4qw",
+      "rankTier": "MASTER",
+      "rankDivision": "I",
+      "leaguePoints": 306
+    }
+  ]
+}
