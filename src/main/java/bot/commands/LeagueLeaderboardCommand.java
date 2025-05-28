@@ -1,4 +1,3 @@
-
 package bot.commands;
 
 import java.awt.Color;
@@ -8,35 +7,45 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import api.riot.RiotApiService;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     private static final String PLAYER_FOLDER = "data/players/";
+    private static final String TRACKING_FOLDER = "data/lp_tracking/";
+    private static ZonedDateTime lastUsed = ZonedDateTime.ofInstant(new Date(0).toInstant(), ZoneId.of("America/New_York"));
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (!event.getName().equals("league-leaderboard")) return;
-        EmbedBuilder embed = buildLeaderboardEmbed();
-        event.replyEmbeds(embed.build())
-                .addActionRow(Button.primary("refresh_leaderboard", "🔄 Refresh"))
-                .queue();
-    }
 
-    @Override
-    public void onButtonInteraction(ButtonInteractionEvent event) {
-        if (!event.getComponentId().equals("refresh_leaderboard")) return;
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/New_York"));
+        if (now.isBefore(lastUsed.plusMinutes(2))) {
+            ZonedDateTime nextAvailable = lastUsed.plusMinutes(2);
+            if (now.isBefore(nextAvailable)) {
+                long secondsLeft = java.time.Duration.between(now, nextAvailable).getSeconds();
+                long minutes = secondsLeft / 60;
+                long seconds = secondsLeft % 60;
+                event.reply(String.format("🕒 This command is on cooldown. Try again in %d minute(s) and %d second(s).", minutes, seconds))
+                        .setEphemeral(true)
+                        .queue();
+                return;
+            }
+
+            return;
+        }
+
+        lastUsed = now;
+        event.deferReply().queue();
         EmbedBuilder embed = buildLeaderboardEmbed();
-        event.deferEdit().queue();
         event.getHook().editOriginalEmbeds(embed.build()).queue();
     }
 
@@ -96,8 +105,6 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
             try {
                 String[] partsA = a.split(" - ");
                 String[] partsB = b.split(" - ");
-                //String rankA = partsA[2].split(" \| ")[0].replaceAll("<:[^>]+>", "").trim();
-                //String rankB = partsB[2].split(" \| ")[0].replaceAll("<:[^>]+>", "").trim();
                 String rankA = partsA[2].split(" \\| ")[0].replaceAll("<:[^>]+>", "").trim();
                 String rankB = partsB[2].split(" \\| ")[0].replaceAll("<:[^>]+>", "").trim();
                 String[] rankPartsA = rankA.split(" ");
@@ -124,8 +131,9 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
             content.append(String.format("%d. %s\n", i + 1, entries.get(i)));
         }
 
+        // Add LP Gain/Loss highlights
         try {
-            String fileName = "data/lp_tracking/" + LocalDate.now(ZoneId.of("America/New_York")) + ".json";
+            String fileName = TRACKING_FOLDER + LocalDate.now(ZoneId.of("America/New_York")) + ".json";
             File file = new File(fileName);
             if (file.exists()) {
                 Gson gson = new Gson();
@@ -143,7 +151,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
                 if (maxGainId != null && maxGain > 0) {
                     final String id = maxGainId;
-                    File[] match = new File("data/players").listFiles((f, name) -> name.startsWith(id + " -"));
+                    File[] match = new File(PLAYER_FOLDER).listFiles((f, name) -> name.startsWith(id + " -"));
                     if (match != null && match.length > 0) {
                         JsonObject data = gson.fromJson(new FileReader(match[0]), JsonObject.class);
                         content.append("\n\n🔼 **Highest LP Gained Today:** ")
@@ -156,7 +164,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
                 if (maxLossId != null && maxLoss < 0) {
                     final String id = maxLossId;
-                    File[] match = new File("data/players").listFiles((f, name) -> name.startsWith(id + " -"));
+                    File[] match = new File(PLAYER_FOLDER).listFiles((f, name) -> name.startsWith(id + " -"));
                     if (match != null && match.length > 0) {
                         JsonObject data = gson.fromJson(new FileReader(match[0]), JsonObject.class);
                         content.append("\n🔽 **Highest LP Lost Today:** ")
@@ -212,7 +220,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
     }
 
     private int tierToValue(String tier) {
-        return switch (tier) {
+        return switch (tier.toUpperCase()) {
             case "CHALLENGER" -> 9;
             case "GRANDMASTER" -> 8;
             case "MASTER" -> 7;
