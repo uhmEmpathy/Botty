@@ -18,7 +18,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     // Fetch and sort users by LP from JSON files
     public List<String> getSortedLeaderboard() {
-        File folder = new File("data/players"); // Adjust path as needed
+        File folder = new File("data/registered"); // Update path if needed
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
         if (files == null) return Collections.emptyList();
 
@@ -28,24 +28,39 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
         for (File file : files) {
             try {
                 Map<String, Object> data = mapper.readValue(file, new TypeReference<>() {});
+
+                if (data.get("leaguePoints") == null ||
+                        data.get("rankTier") == null ||
+                        data.get("discordName") == null ||
+                        data.get("leagueIGN") == null) {
+                    System.out.println("Skipping incomplete file: " + file.getName());
+                    continue;
+                }
+
                 players.add(data);
             } catch (IOException e) {
+                System.out.println("Failed to read: " + file.getName());
                 e.printStackTrace();
             }
         }
 
-        players.sort((a, b) -> Integer.compare((int) b.get("lp"), (int) a.get("lp")));
+        players.sort((a, b) -> {
+            int lpA = Integer.parseInt(a.get("leaguePoints").toString());
+            int lpB = Integer.parseInt(b.get("leaguePoints").toString());
+            return Integer.compare(lpB, lpA);
+        });
 
         List<String> leaderboard = new ArrayList<>();
         int rank = 1;
         for (Map<String, Object> p : players) {
             String line = String.format(
-                    "**%d.** %s (%s) - `%s %d LP`",
+                    "**%d.** %s (%s) - `%s %s - %s LP`",
                     rank++,
                     p.get("discordName"),
                     p.get("leagueIGN"),
-                    p.get("rank"),
-                    p.get("lp")
+                    p.get("rankTier"),
+                    p.getOrDefault("rankDivision", ""),
+                    p.get("leaguePoints").toString()
             );
             leaderboard.add(line);
         }
