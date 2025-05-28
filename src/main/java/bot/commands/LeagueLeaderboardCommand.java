@@ -1,7 +1,7 @@
 package bot.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -10,65 +10,65 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeagueLeaderboardCommand extends ListenerAdapter {
 
-    // Fetch and sort users by LP from JSON files
-    public List<String> getSortedLeaderboard() {
-        File folder = new File("Botty/data/players"); // ✅ Corrected path to your actual folder
-        System.out.println("Looking for player JSONs in: " + folder.getAbsolutePath()); // Debug
+    private static final String PLAYER_FOLDER = "Botty/data/players";
 
-        File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
-        if (files == null) return Collections.emptyList();
-
-        ObjectMapper mapper = new ObjectMapper();
+    private List<Map<String, Object>> getAllPlayers() {
         List<Map<String, Object>> players = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        File folder = new File(PLAYER_FOLDER);
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+
+        if (files == null) {
+            System.out.println("No player files found in: " + folder.getAbsolutePath());
+            return players;
+        }
 
         for (File file : files) {
             try {
                 Map<String, Object> data = mapper.readValue(file, new TypeReference<>() {});
+                if (data.get("leaguePoints") != null &&
+                        data.get("rankTier") != null &&
+                        data.get("discordName") != null &&
+                        data.get("leagueIGN") != null) {
 
-                if (data.get("leaguePoints") == null ||
-                        data.get("rankTier") == null ||
-                        data.get("discordName") == null ||
-                        data.get("leagueIGN") == null) {
-                    System.out.println("Skipping incomplete file: " + file.getName());
-                    continue;
+                    players.add(data);
+                } else {
+                    System.out.println("Skipping file with missing fields: " + file.getName());
                 }
-
-                players.add(data);
-            } catch (IOException e) {
-                System.out.println("Failed to read: " + file.getName());
+            } catch (Exception e) {
+                System.out.println("Failed to parse: " + file.getName());
                 e.printStackTrace();
             }
         }
+        return players;
+    }
 
-        // Sort by LP
+    private String buildLeaderboard(int limit) {
+        List<Map<String, Object>> players = getAllPlayers();
+
         players.sort((a, b) -> {
             int lpA = Integer.parseInt(a.get("leaguePoints").toString());
             int lpB = Integer.parseInt(b.get("leaguePoints").toString());
             return Integer.compare(lpB, lpA);
         });
 
-        List<String> leaderboard = new ArrayList<>();
-        int rank = 1;
-        for (Map<String, Object> p : players) {
-            String line = String.format(
-                    "**%d.** %s (%s) - `%s %s - %s LP`",
-                    rank++,
-                    p.get("discordName"),
-                    p.get("leagueIGN"),
-                    p.get("rankTier"),
-                    p.getOrDefault("rankDivision", ""),
-                    p.get("leaguePoints").toString()
-            );
-            leaderboard.add(line);
-        }
-
-        return leaderboard;
+        return players.stream()
+                .limit(limit)
+                .map(p -> {
+                    String name = p.get("discordName").toString();
+                    String ign = p.get("leagueIGN").toString();
+                    String rank = p.get("rankTier").toString();
+                    String div = p.getOrDefault("rankDivision", "").toString();
+                    String lp = p.get("leaguePoints").toString();
+                    return String.format("**%s** (%s) - `%s %s - %s LP`", name, ign, rank, div, lp);
+                })
+                .collect(Collectors.joining("\n"));
     }
 
     @Override
@@ -77,14 +77,12 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
         event.deferReply().queue();
 
-        List<String> leaderboard = getSortedLeaderboard();
-        String content = leaderboard.isEmpty()
-                ? "No players found."
-                : String.join("\n", leaderboard.subList(0, Math.min(10, leaderboard.size())));
+        String leaderboard = buildLeaderboard(10);
+        if (leaderboard.isEmpty()) leaderboard = "No players found.";
 
         EmbedBuilder embed = new EmbedBuilder()
                 .setTitle("League Leaderboard")
-                .setDescription(content)
+                .setDescription(leaderboard)
                 .setColor(Color.BLUE);
 
         Button refreshButton = Button.primary("refresh_leaderboard", "🔄 Refresh");
@@ -98,27 +96,20 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if (!event.getComponentId().equals("refresh_leaderboard")) return;
 
-        event.deferEdit().queue(success -> {
-            List<String> leaderboard = getSortedLeaderboard();
-            String content = leaderboard.isEmpty()
-                    ? "No players found."
-                    : String.join("\n", leaderboard.subList(0, Math.min(10, leaderboard.size())));
+        event.deferEdit().queue();
 
-            EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("League Leaderboard (Refreshed)")
-                    .setDescription(content)
-                    .setColor(Color.GREEN);
+        String leaderboard = buildLeaderboard(10);
+        if (leaderboard.isEmpty()) leaderboard = "No players found.";
 
-            Button refreshButton = Button.primary("refresh_leaderboard", "🔄 Refresh");
+        EmbedBuilder embed = new EmbedBuilder()
+                .setTitle("League Leaderboard (Refreshed)")
+                .setDescription(leaderboard)
+                .setColor(Color.GREEN);
 
-            event.getHook().editOriginalEmbeds(embed.build())
-                    .setActionRow(refreshButton)
-                    .queue();
+        Button refreshButton = Button.primary("refresh_leaderboard", "🔄 Refresh");
 
-        }, failure -> {
-            event.reply("❌ This button interaction has expired. Please run the command again.")
-                    .setEphemeral(true)
-                    .queue();
-        });
+        event.getHook().editOriginalEmbeds(embed.build())
+                .setActionRow(refreshButton)
+                .queue();
     }
 }
