@@ -6,7 +6,7 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class RiotApiService {
-    private static final String API_KEY = "RGAPI-12d52cd2-4d40-4a7e-a307-ac519089faf2";
+    private static final String API_KEY = "";
     private static final OkHttpClient client = new OkHttpClient();
     private static final Gson gson = new Gson();
 

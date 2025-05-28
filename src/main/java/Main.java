@@ -19,8 +19,8 @@ import com.google.gson.JsonArray;
 
 public class Main {
     public static void main(String[] args) throws LoginException, InterruptedException {
-        String token = "MTM3NjQ2Nzg0NjQyMjU5MzYwNw.GyCvQZ.hDWeOXk6hPYik0ZA_iym7Phx175LPABraMsaQs";
-        String guildId = "1028130852506456106";
+        String token = "";
+        String guildId = "";
 
         RoleValidator.isStaff("0");
         //AdminValidator.isAdmin("0");
