@@ -17,7 +17,6 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     private static final String PLAYER_FOLDER = "data/players";
 
-    // Custom Discord emotes by rank
     private final Map<String, String> rankIcons = Map.ofEntries(
             Map.entry("CHALLENGER", "<:CHALLENGER:1104083066193977425>"),
             Map.entry("GRANDMASTER", "<:GRANDMASTER:1095503610558808218>"),
@@ -41,6 +40,13 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
         Map<String, String> playerIGNs = new HashMap<>();
 
         ObjectMapper mapper = new ObjectMapper();
+
+        if (files == null || files.length == 0) {
+            return new EmbedBuilder()
+                    .setTitle("League Leaderboard")
+                    .setDescription("No registered player data found.")
+                    .setColor(Color.RED);
+        }
 
         for (File file : files) {
             try {
@@ -92,14 +98,6 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
         if (!event.getName().equals("league-leaderboard")) return;
 
         event.deferReply().queue();
-
-        File folder = new File(PLAYER_FOLDER);
-        File[] files = folder.listFiles();
-
-        if (files == null || files.length == 0) {
-            event.getHook().editOriginal("No registered player data found.").queue();
-            return;
-        }
 
         EmbedBuilder embed = buildLeaderboardEmbed(false);
         Button refreshButton = Button.primary("refresh_leaderboard", "🔄 Refresh");
