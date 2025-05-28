@@ -18,7 +18,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     // Fetch and sort users by LP from JSON files
     public List<String> getSortedLeaderboard() {
-        File folder = new File("data/registered"); // Adjust path as needed
+        File folder = new File("data/players"); // Adjust path as needed
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
         if (files == null) return Collections.emptyList();
 
