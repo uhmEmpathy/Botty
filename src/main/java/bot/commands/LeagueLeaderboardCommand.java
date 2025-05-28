@@ -17,17 +17,18 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     private static final String PLAYER_FOLDER = "data/players";
 
-    private final Map<String, String> rankEmojis = Map.of(
-            "CHALLENGER", "🌟",
-            "GRANDMASTER", "🔥",
-            "MASTER", "🥇",
-            "DIAMOND", "💎",
-            "EMERALD", "🍃",
-            "PLATINUM", "🌿",
-            "GOLD", "🥇",
-            "SILVER", "🥈",
-            "BRONZE", "🥉",
-            "IRON", "🪨"
+    // Custom Discord emotes by rank
+    private final Map<String, String> rankIcons = Map.ofEntries(
+            Map.entry("CHALLENGER", "<:CHALLENGER:1104083066193977425>"),
+            Map.entry("GRANDMASTER", "<:GRANDMASTER:1095503610558808218>"),
+            Map.entry("MASTER", "<:MASTER:1095503452618100847>"),
+            Map.entry("DIAMOND", "<:DIAMOND:1095503295197479115>"),
+            Map.entry("EMERALD", "<:EMERALD:1358313265729634417>"),
+            Map.entry("PLATINUM", "<:PLATINUM:1095503100732784792>"),
+            Map.entry("GOLD", "<:GOLD:1095502968071127051>"),
+            Map.entry("SILVER", "<:SILVER:1095502856653635686>"),
+            Map.entry("BRONZE", "<:BRONZE:1095502516449460224>"),
+            Map.entry("IRON", "<:IRON:1095099153039773767>")
     );
 
     private EmbedBuilder buildLeaderboardEmbed(boolean refreshed) {
@@ -47,7 +48,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
                 String discordName = node.get("discordName").asText();
                 String leagueIGN = node.get("leagueIGN").asText();
-                String rankTier = node.get("rankTier").asText();
+                String rankTier = node.get("rankTier").asText().toUpperCase();
                 String rankDivision = node.has("rankDivision") ? node.get("rankDivision").asText() : "";
                 int lp = node.get("leaguePoints").asInt();
 
@@ -75,11 +76,11 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
             String tier = playerRanks.get(discordName);
             String div = playerDivisions.get(discordName);
             String ign = playerIGNs.get(discordName);
-            String emoji = rankEmojis.getOrDefault(tier.toUpperCase(), "");
+            String icon = rankIcons.getOrDefault(tier, "");
 
             embed.appendDescription(String.format(
                     "**%d.** %s (%s) - `%s %s - %d LP` %s\n",
-                    rank++, discordName, ign, tier, div, lp, emoji
+                    rank++, discordName, ign, tier, div, lp, icon
             ));
         }
 
