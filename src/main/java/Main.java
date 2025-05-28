@@ -87,6 +87,7 @@ public class Main {
                 new LeagueLeaderboardCommand(),
                 new VerifyCommand(),
                 new StaffAddCommand(),
+                new ReloadCommand(),
                 new TrackerCommand()
                 );
 
@@ -96,6 +97,7 @@ public class Main {
         if (guild != null) {
             guild.updateCommands()
                     .addCommands(
+                            Commands.slash("reload", "Reloads slash commands (admin only)"),
                             Commands.slash("tracker", "Track LP, rank, and games today for gorillajones#FIGHT."),
                             Commands.slash("staffadd", "Add a Discord user to staff or admin privileges.")
                                     .addOption(OptionType.USER, "user", "The user to grant access to", true)
