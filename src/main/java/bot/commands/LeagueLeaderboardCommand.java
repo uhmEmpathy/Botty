@@ -18,7 +18,9 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
 
     // Fetch and sort users by LP from JSON files
     public List<String> getSortedLeaderboard() {
-        File folder = new File("data/registered"); // Update path if needed
+        File folder = new File("Botty/data/players"); // ✅ Corrected path to your actual folder
+        System.out.println("Looking for player JSONs in: " + folder.getAbsolutePath()); // Debug
+
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
         if (files == null) return Collections.emptyList();
 
@@ -44,6 +46,7 @@ public class LeagueLeaderboardCommand extends ListenerAdapter {
             }
         }
 
+        // Sort by LP
         players.sort((a, b) -> {
             int lpA = Integer.parseInt(a.get("leaguePoints").toString());
             int lpB = Integer.parseInt(b.get("leaguePoints").toString());
